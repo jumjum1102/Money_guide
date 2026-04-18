@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Singapore Money Guide | 生活コスト・給与・税制</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════ RESET & BASE ═══════════════════ */
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:#FAFAF7;
+  color:#1C1C1C;
+  overflow-x:hidden;
+  line-height:1.7;
+}
+:root{
+  --ink:#1C1C1C;
+  --gold:#B8821E;
+  --gold-lt:rgba(184,130,30,.1);
+  --border:#E5E0D8;
+  --muted:#888;
+  --mid:#555;
+  --bg:#FAFAF7;
+  --bg2:#F2EEE7;
+  --white:#FFFFFF;
+  --sg:#C0192A;   /* Singapore red */
+  --jp:#1A56A0;   /* Japan blue */
+}
+img{display:block;max-width:100%;}
+
+/* ═══════════════════ FADE ═══════════════════ */
+.fade{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease;}
+.fade.v{opacity:1;transform:translateY(0);}
+.fade.d1{transition-delay:.1s;} .fade.d2{transition-delay:.22s;}
+.fade.d3{transition-delay:.34s;} .fade.d4{transition-delay:.46s;}
+.slide-l{opacity:0;transform:translateX(-32px);transition:opacity .8s ease,transform .8s ease;}
+.slide-l.v{opacity:1;transform:translateX(0);}
+.slide-r{opacity:0;transform:translateX(32px);transition:opacity .8s ease,transform .8s ease;}
+.slide-r.v{opacity:1;transform:translateX(0);}
+
+/* ═══════════════════ HEADER ═══════════════════ */
+#hdr{
+  position:fixed;top:0;left:0;right:0;z-index:300;
+  background:rgba(250,250,247,.96);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  height:58px;padding:0 clamp(20px,4vw,56px);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);}
+.logo span{color:var(--gold);}
+#dnav{display:flex;gap:0;}
+.nl{border:none;background:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);padding:6px 14px;cursor:pointer;transition:color .2s;font-family:'DM Sans',sans-serif;}
+.nl:hover,.nl.on{color:var(--ink);}
+#hbg{display:none;border:none;background:none;font-size:22px;color:var(--ink);cursor:pointer;}
+#smenu{
+  display:none;position:fixed;top:58px;left:0;right:0;z-index:299;
+  background:var(--white);border-bottom:1px solid var(--border);
+  padding:12px 20px;
+}
+#smenu.open{display:block;}
+.sl{display:block;padding:10px 0;border-bottom:1px solid var(--border);
+  font-size:13px;color:var(--ink);cursor:pointer;}
+
+/* ═══════════════════ HERO ═══════════════════ */
+#hero{
+  padding-top:58px;min-height:100svh;
+  display:grid;grid-template-columns:1fr 1fr;
+}
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(48px,8vh,96px) clamp(20px,5vw,72px);
+  background:var(--bg);
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:12px;
+  font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);
+  margin-bottom:24px;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--gold);}
+h1.ht{
+  font-family:'Noto Serif JP',serif;
+  font-size:clamp(30px,4.5vw,58px);
+  font-weight:300;line-height:1.2;color:var(--ink);margin-bottom:24px;
+}
+h1.ht em{font-family:'Playfair Display',serif;font-style:italic;color:var(--gold);}
+.hero-p{font-size:14px;color:var(--muted);line-height:1.9;max-width:400px;margin-bottom:40px;}
+.hero-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--border);padding-top:28px;}
+.kp{padding-right:20px;}
+.kp+.kp{border-left:1px solid var(--border);padding-left:20px;}
+.kp-v{font-family:'Playfair Display',serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:var(--ink);line-height:1;}
+.kp-l{font-size:10px;color:var(--muted);margin-top:6px;letter-spacing:.5px;line-height:1.5;}
+.hero-right{position:relative;overflow:hidden;background:#1C1C1C;}
+.hero-right img{width:100%;height:100%;object-fit:cover;opacity:.7;transform:scale(1.04);transition:transform 9s ease;}
+.hero-right img.rdy{transform:scale(1);}
+.hero-tag{
+  position:absolute;bottom:28px;left:28px;
+  background:var(--white);border-left:3px solid var(--gold);
+  padding:12px 16px;
+}
+.hero-tag-l{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+.hero-tag-v{font-size:17px;font-weight:700;color:var(--ink);margin-top:2px;}
+
+/* ═══════════════════ SECTION SHELLS ═══════════════════ */
+.sec{padding:clamp(72px,10vh,120px) clamp(20px,4vw,56px);border-bottom:1px solid var(--border);}
+.sec-alt{padding:clamp(72px,10vh,120px) clamp(20px,4vw,56px);background:var(--bg2);border-bottom:1px solid var(--border);}
+.sec-dark{padding:clamp(72px,10vh,120px) clamp(20px,4vw,56px);background:var(--ink);border-bottom:1px solid rgba(255,255,255,.06);}
+.inner{max-width:960px;margin:0 auto;}
+.inner-w{max-width:1100px;margin:0 auto;}
+
+/* chapter header */
+.ch-lbl{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.ch-t{font-family:'Noto Serif JP',serif;font-size:clamp(24px,3.5vw,42px);font-weight:300;color:var(--ink);line-height:1.25;margin-bottom:10px;}
+.ch-t.dark{color:#fff;}
+.ch-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--muted);margin-bottom:48px;}
+.ch-sub.dark{color:rgba(255,255,255,.4);}
+.ch-rule{width:40px;height:2px;background:var(--ink);margin-bottom:48px;}
+.ch-rule.dark{background:rgba(255,255,255,.2);}
+
+/* grids */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,60px);align-items:start;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,3vw,28px);}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,20px);}
+
+/* body text */
+.bp{font-size:14px;color:var(--mid);line-height:1.9;}
+.bp+.bp{margin-top:14px;}
+strong{font-weight:600;color:var(--ink);}
+
+/* ═══════════════════ STAT CARD ═══════════════════ */
+.stat{border-top:2px solid var(--ink);padding-top:16px;}
+.stat.gold{border-top-color:var(--gold);}
+.stat.sg{border-top-color:var(--sg);}
+.stat.jp{border-top-color:var(--jp);}
+.stat-n{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:700;color:var(--ink);line-height:1;}
+.stat-n .u{font-size:.42em;font-weight:400;color:var(--muted);}
+.stat-l{font-size:11px;color:var(--muted);margin-top:7px;line-height:1.6;}
+.stat.dark-st{border-top-color:rgba(255,255,255,.15);}
+.stat.dark-st .stat-n{color:#fff;}
+.stat.dark-st .stat-l{color:rgba(255,255,255,.4);}
+.stat.gold-d{border-top-color:var(--gold);}
+.stat.gold-d .stat-n{color:var(--gold);}
+
+/* ═══════════════════ CARD ═══════════════════ */
+.card{border:1px solid var(--border);padding:26px 22px;background:var(--white);}
+.card.top-gold{border-top:3px solid var(--gold);}
+.card.top-sg{border-top:3px solid var(--sg);}
+.card.top-jp{border-top:3px solid var(--jp);}
+.card-ico{font-size:26px;margin-bottom:12px;}
+.card-t{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px;}
+.card-b{font-size:13px;color:var(--mid);line-height:1.8;}
+
+/* ═══════════════════ COMPARISON BAR ═══════════════════ */
+.cbar{display:flex;flex-direction:column;gap:14px;}
+.cbar-row{display:flex;align-items:center;gap:12px;}
+.cbar-label{font-size:12px;color:var(--mid);min-width:110px;flex-shrink:0;}
+.cbar-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;position:relative;}
+.cbar-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.16,1,.3,1);}
+.cbar-val{font-size:12px;font-weight:600;min-width:72px;text-align:right;}
+
+/* ═══════════════════ COMPARISON TABLE ═══════════════════ */
+.ctbl{width:100%;border-collapse:collapse;font-size:13px;}
+.ctbl th{
+  padding:12px 16px;font-size:9px;letter-spacing:3px;text-transform:uppercase;
+  text-align:left;font-weight:600;border-bottom:2px solid var(--ink);
+}
+.ctbl th.sg{color:var(--sg);}
+.ctbl th.jp{color:var(--jp);}
+.ctbl td{
+  padding:13px 16px;border-bottom:1px solid var(--border);
+  color:var(--mid);vertical-align:top;line-height:1.6;
+}
+.ctbl td:first-child{font-weight:600;color:var(--ink);}
+.ctbl tr:hover td{background:rgba(184,130,30,.04);}
+.hi{color:var(--sg)!important;font-weight:600!important;}
+.hi2{color:var(--jp)!important;font-weight:600!important;}
+
+/* ═══════════════════ TAX BRACKET VISUAL ═══════════════════ */
+.tax-band{
+  display:flex;align-items:stretch;gap:2px;
+  height:44px;border-radius:4px;overflow:hidden;
+  margin-bottom:12px;
+}
+.tb-seg{
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;color:#fff;
+  text-align:center;line-height:1.2;
+  transition:flex .6s ease;
+  position:relative;overflow:hidden;
+}
+.tb-seg:hover::after{
+  content:attr(data-tip);
+  position:absolute;bottom:110%;left:50%;transform:translateX(-50%);
+  background:#1C1C1C;color:#fff;font-size:11px;
+  padding:6px 10px;white-space:nowrap;border-radius:2px;
+  pointer-events:none;z-index:10;
+}
+
+/* ═══════════════════ PULL QUOTE ═══════════════════ */
+.pq{border-left:3px solid var(--gold);padding:18px 24px;background:var(--gold-lt);margin:28px 0;}
+.pq blockquote{font-family:'Playfair Display',serif;font-size:clamp(15px,2vw,20px);font-style:italic;color:var(--ink);line-height:1.6;}
+.pq cite{display:block;font-size:11px;color:var(--muted);margin-top:10px;font-style:normal;letter-spacing:2px;text-transform:uppercase;}
+
+/* ═══════════════════ LEARN ITEM ═══════════════════ */
+.li{display:flex;gap:20px;padding:20px 0;border-bottom:1px solid var(--border);}
+.li:last-child{border-bottom:none;}
+.li-n{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:var(--border);line-height:1;flex-shrink:0;}
+.li-t{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.li-b{font-size:13px;color:var(--mid);line-height:1.8;}
+
+/* ═══════════════════ DARK CARD ═══════════════════ */
+.dk{border:1px solid rgba(255,255,255,.07);padding:24px 20px;background:rgba(255,255,255,.03);}
+.dk-l{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(184,130,30,.75);margin-bottom:8px;}
+.dk-t{font-size:14px;font-weight:600;color:#fff;margin-bottom:8px;}
+.dk-b{font-size:13px;color:rgba(255,255,255,.5);line-height:1.8;}
+
+/* ═══════════════════ IMG WRAP ═══════════════════ */
+.iw{position:relative;overflow:hidden;}
+.iw img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease;}
+.iw:hover img{transform:scale(1.04);}
+.iw-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top,rgba(28,28,28,.88) 0%,transparent 100%);padding:18px 18px 14px;}
+.iw-cl{font-size:9px;letter-spacing:3px;color:rgba(184,130,30,.8);text-transform:uppercase;margin-bottom:3px;}
+.iw-cv{font-size:13px;color:rgba(255,255,255,.8);}
+
+/* ═══════════════════ FOOTER ═══════════════════ */
+footer{padding:clamp(52px,8vh,72px) clamp(20px,4vw,56px) clamp(28px,4vh,40px);background:var(--ink);}
+.ft-in{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:clamp(28px,4vw,56px);margin-bottom:48px;}
+.ft-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:10px;}
+.ft-logo span{color:var(--gold);}
+.ft-desc{font-size:12px;color:rgba(255,255,255,.3);line-height:1.8;max-width:220px;}
+.ft-col-t{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.ft-lnk{display:block;font-size:12px;color:rgba(255,255,255,.3);padding:5px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer;transition:color .2s;}
+.ft-lnk:hover{color:#fff;}
+.ft-btm{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:22px;border-top:1px solid rgba(255,255,255,.06);font-size:11px;color:rgba(255,255,255,.18);}
+
+/* ═══════════════════ BACK TO TOP ═══════════════════ */
+#btt{position:fixed;bottom:28px;right:28px;z-index:100;width:42px;height:42px;background:var(--ink);color:#fff;border:none;font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s;}
+#btt.show{opacity:1;pointer-events:all;}
+
+/* ═══════════════════ RESPONSIVE ═══════════════════ */
+@media(max-width:900px){
+  #hero{grid-template-columns:1fr;}
+  .hero-right{height:320px;}
+  .g2{grid-template-columns:1fr;}
+  .g3{grid-template-columns:1fr 1fr;}
+  .g4{grid-template-columns:1fr 1fr;}
+  .ft-in{grid-template-columns:1fr 1fr;gap:32px;}
+  .ctbl{font-size:12px;}
+  .ctbl th,.ctbl td{padding:10px 10px;}
+}
+@media(max-width:640px){
+  #dnav{display:none;}
+  #hbg{display:block;}
+  #hero{padding-top:58px;}
+  .hero-kpis{grid-template-columns:1fr 1fr;}
+  .hero-kpis .kp:last-child{display:none;}
+  h1.ht{font-size:clamp(28px,8vw,40px);}
+  .g3,.g4{grid-template-columns:1fr;}
+  .ft-in{grid-template-columns:1fr;}
+  .ft-btm{flex-direction:column;gap:6px;text-align:center;}
+  .tax-band{height:36px;}
+  #btt{bottom:18px;right:18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="logo">Singapore<span>Money</span></div>
+  <nav id="dnav">
+    <button class="nl" onclick="go('s1')">給与</button>
+    <button class="nl" onclick="go('s2')">物価・インフレ</button>
+    <button class="nl" onclick="go('s3')">生活コスト</button>
+    <button class="nl" onclick="go('s4')">税制</button>
+    <button class="nl" onclick="go('s5')">貯蓄</button>
+    <button class="nl" onclick="go('s6')">まとめ</button>
+  </nav>
+  <button id="hbg" onclick="toggleM()">☰</button>
+</header>
+<div id="smenu">
+  <div class="sl" onclick="go('s1')">01 — 給与・年収比較</div>
+  <div class="sl" onclick="go('s2')">02 — 物価・インフレ推移</div>
+  <div class="sl" onclick="go('s3')">03 — 生活コスト詳細</div>
+  <div class="sl" onclick="go('s4')">04 — 税制比較</div>
+  <div class="sl" onclick="go('s5')">05 — 年代別貯蓄額</div>
+  <div class="sl" onclick="go('s6')">06 — まとめ</div>
+</div>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow fade v">Singapore Money Guide 2025</div>
+    <h1 class="ht fade v d1">給与・生活コスト・<br><em>税制</em>の全体像</h1>
+    <p class="hero-p fade v d2">一人あたりGDP世界第2位のシンガポールは、高い給与水準・低い所得税・独自のCPF制度を持つ。一方で住居費・教育費・外食費は世界最高水準。生活コストと収入の実態を日本との比較で読み解く。</p>
+    <div class="hero-kpis fade v d3">
+      <div class="kp"><div class="kp-v">S$5,775</div><div class="kp-l">月収中央値（2025年）<br>含雇用主CPF</div></div>
+      <div class="kp"><div class="kp-v">最高24%</div><div class="kp-l">個人所得税<br>最高税率</div></div>
+      <div class="kp"><div class="kp-v">37%</div><div class="kp-l">CPF拠出率<br>（労使合計）</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img id="hi" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=80" alt="Singapore skyline">
+    <div class="hero-tag"><div class="hero-tag-l">Per Capita GDP</div><div class="hero-tag-v">世界第2位 〜US$88,000</div></div>
+  </div>
+</div>
+
+<!-- ═══ S1: 給与比較 ═══ -->
+<section id="s1" class="sec">
+<div class="inner">
+  <div class="fade"><div class="ch-lbl">Chapter 01</div></div>
+  <div class="fade d1"><h2 class="ch-t">給与・年収比較<br>シンガポール vs 日本</h2></div>
+  <div class="fade d2"><p class="ch-sub">Salary Comparison — Singapore vs Japan by Age Group & Industry</p></div>
+  <div class="fade d2"><div class="ch-rule"></div></div>
+
+  <!-- Age salary bars SG -->
+  <div class="g2" style="margin-bottom:52px;">
+    <div>
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px;" class="fade">
+        <span style="width:12px;height:12px;background:var(--sg);border-radius:50%;flex-shrink:0;"></span>
+        シンガポール 年代別月収中央値（2024年・含雇用主CPF）
+      </h3>
+      <div class="cbar fade">
+        <div class="cbar-row"><div class="cbar-label">20〜24歳</div><div class="cbar-track"><div class="cbar-fill" style="width:35%;background:var(--sg);"></div></div><div class="cbar-val" style="color:var(--sg);">S$2,720</div></div>
+        <div class="cbar-row"><div class="cbar-label">25〜29歳</div><div class="cbar-track"><div class="cbar-fill" style="width:55%;background:var(--sg);"></div></div><div class="cbar-val" style="color:var(--sg);">S$4,260</div></div>
+        <div class="cbar-row"><div class="cbar-label">30〜34歳</div><div class="cbar-track"><div class="cbar-fill" style="width:72%;background:var(--sg);"></div></div><div class="cbar-val" style="color:var(--sg);">S$5,585</div></div>
+        <div class="cbar-row"><div class="cbar-label">35〜39歳</div><div class="cbar-track"><div class="cbar-fill" style="width:82%;background:var(--sg);"></div></div><div class="cbar-val" style="color:var(--sg);">S$6,281</div></div>
+        <div class="cbar-row"><div class="cbar-label">40〜44歳</div><div class="cbar-track"><div class="cbar-fill" style="width:100%;background:var(--sg);"></div></div><div class="cbar-val" style="color:var(--sg);">S$7,800</div></div>
+        <div class="cbar-row"><div class="cbar-label">45〜49歳</div><div class="cbar-track"><div class="cbar-fill" style="width:98%;background:var(--sg);"></div></div><div class="cbar-val" style="color:var(--sg);">S$7,650</div></div>
+        <div class="cbar-row"><div class="cbar-label">50〜54歳</div><div class="cbar-track"><div class="cbar-fill" style="width:88%;background:#888;"></div></div><div class="cbar-val" style="color:var(--muted);">S$6,900</div></div>
+        <div class="cbar-row"><div class="cbar-label">55〜59歳</div><div class="cbar-track"><div class="cbar-fill" style="width:65%;background:#aaa;"></div></div><div class="cbar-val" style="color:var(--muted);">S$5,100</div></div>
+        <div class="cbar-row"><div class="cbar-label">60歳以上</div><div class="cbar-track"><div class="cbar-fill" style="width:41%;background:#ccc;"></div></div><div class="cbar-val" style="color:var(--muted);">S$3,222</div></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px;" class="fade">出典: MOM Labour Force in Singapore 2024</p>
+    </div>
+    <div>
+      <h3 style="font-size:15px;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px;" class="fade">
+        <span style="width:12px;height:12px;background:var(--jp);border-radius:50%;flex-shrink:0;"></span>
+        日本 年代別月収中央値（2024年・税込）
+      </h3>
+      <div class="cbar fade">
+        <div class="cbar-row"><div class="cbar-label">20〜24歳</div><div class="cbar-track"><div class="cbar-fill" style="width:33%;background:var(--jp);"></div></div><div class="cbar-val" style="color:var(--jp);">¥220,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">25〜29歳</div><div class="cbar-track"><div class="cbar-fill" style="width:42%;background:var(--jp);"></div></div><div class="cbar-val" style="color:var(--jp);">¥275,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">30〜34歳</div><div class="cbar-track"><div class="cbar-fill" style="width:53%;background:var(--jp);"></div></div><div class="cbar-val" style="color:var(--jp);">¥350,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">35〜39歳</div><div class="cbar-track"><div class="cbar-fill" style="width:62%;background:var(--jp);"></div></div><div class="cbar-val" style="color:var(--jp);">¥412,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">40〜44歳</div><div class="cbar-track"><div class="cbar-fill" style="width:72%;background:var(--jp);"></div></div><div class="cbar-val" style="color:var(--jp);">¥476,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">45〜49歳</div><div class="cbar-track"><div class="cbar-fill" style="width:82%;background:var(--jp);"></div></div><div class="cbar-val" style="color:var(--jp);">¥543,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">50〜54歳</div><div class="cbar-track"><div class="cbar-fill" style="width:100%;background:var(--jp);"></div></div><div class="cbar-val" style="color:var(--jp);">¥660,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">55〜59歳</div><div class="cbar-track"><div class="cbar-fill" style="width:93%;background:#666;"></div></div><div class="cbar-val" style="color:var(--muted);">¥615,000</div></div>
+        <div class="cbar-row"><div class="cbar-label">60歳以上</div><div class="cbar-track"><div class="cbar-fill" style="width:55%;background:#999;"></div></div><div class="cbar-val" style="color:var(--muted);">¥363,000</div></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px;" class="fade">出典: 国税庁 令和5年民間給与実態統計（推計換算）</p>
+    </div>
+  </div>
+
+  <!-- Industry comparison table -->
+  <h3 style="font-size:16px;font-weight:600;margin-bottom:20px;" class="fade">業種別月収中央値（概算）</h3>
+  <div style="overflow-x:auto;" class="fade">
+    <table class="ctbl" style="min-width:540px;">
+      <thead><tr>
+        <th>業種</th>
+        <th class="sg">🇸🇬 シンガポール（月収中央値）</th>
+        <th class="jp">🇯🇵 日本（月収中央値）</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>金融・保険</td><td class="hi">S$8,736</td><td>¥580,000</td></tr>
+        <tr><td>情報通信・IT</td><td class="hi">S$7,800</td><td>¥490,000</td></tr>
+        <tr><td>専門・技術サービス</td><td class="hi">S$7,200</td><td>¥420,000</td></tr>
+        <tr><td>製造業</td><td>S$5,600</td><td>¥390,000</td></tr>
+        <tr><td>医療・福祉</td><td>S$5,200</td><td>¥310,000</td></tr>
+        <tr><td>教育</td><td>S$5,000</td><td>¥350,000</td></tr>
+        <tr><td>小売・卸売</td><td>S$4,100</td><td>¥310,000</td></tr>
+        <tr><td>飲食・宿泊</td><td>S$2,974</td><td>¥270,000</td></tr>
+        <tr><td style="font-weight:700;">全産業中央値</td><td class="hi" style="font-weight:700;">S$5,500</td><td class="hi2" style="font-weight:700;">¥363,000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:8px;" class="fade">※1SGD≈110円換算時、SG月収中央値≒¥605,000（日本の1.67倍）。物価・税負担を考慮した実質的な差は縮まる。</p>
+
+  <div class="g4" style="margin-top:48px;">
+    <div class="stat fade"><div class="stat-n sg">S$5,500<span class="u">/月</span></div><div class="stat-l">シンガポール月収中央値（2024年・含CPF）</div></div>
+    <div class="stat fade d1"><div class="stat-n jp">¥363,000<span class="u">/月</span></div><div class="stat-l">日本月収中央値（2024年・国税庁推計）</div></div>
+    <div class="stat gold fade d2"><div class="stat-n">+5.8<span class="u">%</span></div><div class="stat-l">シンガポール名目賃金成長率（2024年）</div></div>
+    <div class="stat fade d3"><div class="stat-n">+3.2<span class="u">%</span></div><div class="stat-l">シンガポール実質賃金成長率（インフレ調整後）</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ S2: 物価・インフレ ═══ -->
+<section id="s2" class="sec-alt">
+<div class="inner">
+  <div class="fade"><div class="ch-lbl">Chapter 02</div></div>
+  <div class="fade d1"><h2 class="ch-t">物価指数・インフレ推移<br>20年の軌跡</h2></div>
+  <div class="fade d2"><p class="ch-sub">CPI & Inflation — Singapore vs Japan 2005–2025</p></div>
+  <div class="fade d2"><div class="ch-rule"></div></div>
+
+  <div class="g2" style="margin-bottom:48px;">
+    <div class="fade">
+      <p class="bp">シンガポールの物価は2005年基準から<strong>約165〜170ポイント台</strong>（60〜70%上昇）に達している。一方、日本は長期デフレの影響で同期間の上昇幅はわずか<strong>10〜15%程度</strong>にとどまる。コロナ後は両国ともインフレ圧力が高まったが、シンガポールはより早期に4〜6%台に達した。</p>
+      <p class="bp">特に2022〜2023年のシンガポールは<strong>インフレ率5〜6%台</strong>を記録し、住居費・食費・交通費が急騰。政府はGST（消費税）を2023年に8%→2024年に9%に引き上げた一方、低所得層向けのCDC補助金でバランスを取る政策を採った。</p>
+    </div>
+    <div class="fade d1">
+      <!-- Inline SVG chart of inflation -->
+      <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:420px;border:1px solid var(--border);background:#fff;padding:10px;">
+        <text x="10" y="18" font-size="9" fill="#888" font-family="DM Sans,sans-serif">CPI推移（2005=100基準）</text>
+        <!-- Grid lines -->
+        <line x1="40" y1="25" x2="355" y2="25" stroke="#eee" stroke-width="1"/>
+        <line x1="40" y1="70" x2="355" y2="70" stroke="#eee" stroke-width="1"/>
+        <line x1="40" y1="115" x2="355" y2="115" stroke="#eee" stroke-width="1"/>
+        <line x1="40" y1="160" x2="355" y2="160" stroke="#eee" stroke-width="1"/>
+        <!-- Y labels -->
+        <text x="4" y="28" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">180</text>
+        <text x="4" y="73" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">150</text>
+        <text x="4" y="118" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">120</text>
+        <text x="4" y="163" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">100</text>
+        <!-- X labels -->
+        <text x="38" y="190" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">2005</text>
+        <text x="100" y="190" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">2010</text>
+        <text x="163" y="190" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">2015</text>
+        <text x="225" y="190" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">2020</text>
+        <text x="290" y="190" font-size="8" fill="#aaa" font-family="DM Sans,sans-serif">2025</text>
+        <!-- SG line: 100→117→130→140→148→165 -->
+        <polyline points="40,160 102,130 164,113 226,104 288,68 354,42" fill="none" stroke="#C0192A" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- JP line: 100→102→104→104→106→115 -->
+        <polyline points="40,160 102,157 164,153 226,151 288,145 354,125" fill="none" stroke="#1A56A0" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- SG dots -->
+        <circle cx="40" cy="160" r="3" fill="#C0192A"/>
+        <circle cx="354" cy="42" r="3" fill="#C0192A"/>
+        <!-- JP dots -->
+        <circle cx="40" cy="160" r="3" fill="#1A56A0"/>
+        <circle cx="354" cy="125" r="3" fill="#1A56A0"/>
+        <!-- Labels -->
+        <text x="310" y="38" font-size="9" fill="#C0192A" font-weight="bold" font-family="DM Sans,sans-serif">SG ≈168</text>
+        <text x="310" y="122" font-size="9" fill="#1A56A0" font-weight="bold" font-family="DM Sans,sans-serif">JP ≈115</text>
+      </svg>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px;">※推計値。実際のCPIとは若干異なる場合があります</p>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card top-sg fade">
+      <div class="card-ico">📈</div>
+      <div class="card-t">SG インフレ率推移</div>
+      <div class="card-b">2021年:2.3%→ 2022年:6.1%（20年ぶり高水準）→ 2023年:4.8%→ 2024年:2.4%→ 2025年予測:1-2%台。コロナ後の急騰から徐々に収束。</div>
+    </div>
+    <div class="card top-jp fade d1">
+      <div class="card-ico">📉</div>
+      <div class="card-t">JP インフレ率推移</div>
+      <div class="card-b">2010〜2020年:長期デフレでCPI≒0〜1%。2022年:3.0%（消費税の影響を除くと本格的インフレ）→ 2023年:3.3%→ 2024年:2.7%。円安が輸入物価を押し上げ。</div>
+    </div>
+    <div class="card top-gold fade d2">
+      <div class="card-ico">💱</div>
+      <div class="card-t">生活実感の違い</div>
+      <div class="card-b">シンガポールは名目給与の伸び（年率4%）がインフレ（年率3〜6%）と競合。日本は長期的な実質賃金の停滞が続いた後、2024年ようやく実質賃金がプラス転換。</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ S3: 生活コスト詳細 ═══ -->
+<section id="s3" class="sec">
+<div class="inner-w">
+  <div class="fade"><div class="ch-lbl">Chapter 03</div></div>
+  <div class="fade d1"><h2 class="ch-t">生活コスト詳細比較</h2></div>
+  <div class="fade d2"><p class="ch-sub">Detailed Cost of Living Comparison — Singapore vs Japan</p></div>
+  <div class="fade d2"><div class="ch-rule"></div></div>
+
+  <!-- Big comparison table -->
+  <div style="overflow-x:auto;" class="fade">
+    <table class="ctbl" style="min-width:580px;">
+      <thead><tr>
+        <th>カテゴリ / 項目</th>
+        <th class="sg">🇸🇬 シンガポール</th>
+        <th class="jp">🇯🇵 東京（参考）</th>
+        <th>備考</th>
+      </tr></thead>
+      <tbody>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">🍚 食費</td></tr>
+        <tr><td>ホーカーセンター（1食）</td><td class="hi">S$4〜8</td><td>¥600〜1,200</td><td>シンガポール最大の食費節約手段</td></tr>
+        <tr><td>コーヒーショップ・フードコート</td><td>S$6〜12</td><td>¥800〜1,500</td><td></td></tr>
+        <tr><td>カジュアルレストラン（1人）</td><td>S$15〜35</td><td>¥1,500〜3,500</td><td></td></tr>
+        <tr><td>マクドナルド（バリューセット）</td><td>S$7〜10</td><td>¥600〜850</td><td>SG価格は東京より高め</td></tr>
+        <tr><td>スターバックス（ラテ・Tall）</td><td>S$7〜8</td><td>¥590〜680</td><td>ほぼ同水準</td></tr>
+        <tr><td>食材費（月・1人）</td><td>S$250〜400</td><td>¥25,000〜40,000</td><td>輸入品が多く割高な場合も</td></tr>
+        <tr><td>食費月合計（外食込・1人）</td><td class="hi">S$500〜900</td><td>¥45,000〜80,000</td><td>ホーカー中心なら安く抑えられる</td></tr>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">🏠 住居費</td></tr>
+        <tr><td>HDB（3BR）賃料・月</td><td class="hi">S$3,000〜4,350</td><td>—</td><td>外国人はHDB購入不可・賃貸のみ</td></tr>
+        <tr><td>コンドミニアム 1BR・月</td><td class="hi">S$2,400〜4,000</td><td>¥150,000〜280,000</td><td>都心部は¥300,000超も</td></tr>
+        <tr><td>コンドミニアム 3BR・月</td><td class="hi">S$5,000〜12,000</td><td>¥250,000〜500,000</td><td></td></tr>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">🚌 交通費</td></tr>
+        <tr><td>MRT/バス（1乗車）</td><td class="hi">S$0.80〜2.20</td><td>¥200〜300</td><td>シンガポールが圧倒的に安い</td></tr>
+        <tr><td>公共交通月額（通勤）</td><td class="hi">S$60〜120</td><td>¥15,000〜20,000</td><td>東京の5〜10分の1の費用</td></tr>
+        <tr><td>Grab（タクシー・5km）</td><td>S$10〜20</td><td>¥1,500〜2,500</td><td>ピーク時は割増</td></tr>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">📱 通信費</td></tr>
+        <tr><td>スマートフォン（SIMのみ）</td><td class="hi">S$9〜35</td><td>¥2,000〜5,000</td><td>シンガポールが格安（MVNOも豊富）</td></tr>
+        <tr><td>光ファイバー（自宅）</td><td class="hi">S$35〜55</td><td>¥4,000〜6,000</td><td>1Gbps回線でもシンガポールが安い</td></tr>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">💡 光熱費</td></tr>
+        <tr><td>電気・水道・ガス（月）</td><td>S$150〜300</td><td>¥15,000〜25,000</td><td>エアコン常用で高騰しやすい</td></tr>
+        <tr><td>インターネット込月合計</td><td>S$190〜350</td><td>¥20,000〜30,000</td><td></td></tr>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">🏥 医療費</td></tr>
+        <tr><td>GP（一般医）受診</td><td>S$25〜60</td><td>¥2,000〜3,000（3割負担）</td><td>保険なしの場合</td></tr>
+        <tr><td>専門医受診（私立）</td><td>S$100〜300+</td><td>¥3,000〜8,000（3割負担）</td><td>SG民間医療は非常に高額</td></tr>
+        <tr><td>歯科（スケーリング）</td><td>S$80〜150</td><td>¥3,000〜5,000（3割負担）</td><td></td></tr>
+        <tr><td>入院（1泊・C級病床）</td><td>S$40〜100（補助後）</td><td>¥10,000〜30,000</td><td>SG政府病院は補助あり</td></tr>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">📚 教育費</td></tr>
+        <tr><td>公立小学校（月額）</td><td class="hi">S$0（市民は無料）</td><td>¥0（義務教育）</td><td></td></tr>
+        <tr><td>インターナショナルスクール</td><td class="hi">S$2,500〜4,000/月</td><td>¥200,000〜400,000/月</td><td>年間S$30〜50万は必要</td></tr>
+        <tr><td>大学学費（市民・4年合計）</td><td>S$23,580〜54,000</td><td>¥250万〜400万（国立）</td><td></td></tr>
+        <tr><td colspan="4" style="background:var(--bg2);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);padding:10px 16px;">✈️ 旅行・余暇</td></tr>
+        <tr><td>海外旅行（年平均回数）</td><td class="hi">3〜5回</td><td>¥1〜2回</td><td>SG→BKK・KL・バリなど格安航空充実</td></tr>
+        <tr><td>近隣旅行（往復航空券）</td><td class="hi">S$150〜300</td><td>¥30,000〜80,000</td><td>SG発はLCC激戦で格安</td></tr>
+        <tr><td>フィットネスジム（月額）</td><td>S$60〜120</td><td>¥8,000〜15,000</td><td></td></tr>
+        <tr><td>衣服（月平均支出）</td><td>S$100〜300</td><td>¥10,000〜30,000</td><td>ハイブランドはSGの方が高い場合も</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Monthly budget visual -->
+<div class="g2" style="margin-top:52px;">
+  <div class="fade">
+    <h3 style="font-size:16px;font-weight:600;margin-bottom:20px;">月間生活費モデル（1人・コンド賃貸）</h3>
+    <div style="border:1px solid var(--border);padding:24px;background:var(--white);">
+      <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--sg);margin-bottom:16px;">🇸🇬 シンガポール</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>住居費（1BR コンド）</span>
+          <span style="font-weight:600;color:var(--sg);">S$2,800</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>食費（ホーカー中心）</span>
+          <span style="font-weight:600;">S$600</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>交通費（公共交通）</span>
+          <span style="font-weight:600;">S$100</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>通信費（スマホ+光回線）</span>
+          <span style="font-weight:600;">S$60</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>光熱費</span>
+          <span style="font-weight:600;">S$200</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>医療・保険</span>
+          <span style="font-weight:600;">S$150</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-size:13px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <span>娯楽・旅行積立</span>
+          <span style="font-weight:600;">S$400</span>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700;padding:12px 0;border-top:2px solid var(--ink);margin-top:4px;">
+          <span>月合計</span>
+          <span style="color:var(--sg);">S$4,310〜</span>
+        </div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px;">※住居費が総支出の60%以上を占める。HDB居住や同居なら大幅に削減可能。</p>
+    </div>
+  </div>
+
+  <div class="fade d1">
+    <div class="iw" style="height:280px;margin-bottom:20px;">
+      <img src="https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=700&q=80" alt="Singapore hawker food">
+      <div class="iw-cap">
+        <div class="iw-cl">食費節約の要</div>
+        <div class="iw-cv">ホーカーセンター：S$4〜8で本格的な食事</div>
+      </div>
+    </div>
+    <div class="pq">
+      <blockquote>「交通費・通信費はシンガポールの方が圧倒的に安い。生活コストの差は住居費・教育費の選択で大きく変わる。」</blockquote>
+      <cite>— Singapore Money Guide 2025</cite>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ S4: 税制 ═══ -->
+<section id="s4" class="sec-dark">
+<div class="inner">
+  <div class="fade"><div class="ch-lbl">Chapter 04</div></div>
+  <div class="fade d1"><h2 class="ch-t dark">税制比較<br>シンガポール vs 日本</h2></div>
+  <div class="fade d2"><p class="ch-sub dark">Tax System Comparison — Key Differences</p></div>
+  <div class="fade d2"><div class="ch-rule dark"></div></div>
+
+  <!-- SG tax bands visual -->
+  <div style="margin-bottom:48px;" class="fade">
+    <h3 style="font-size:14px;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:16px;letter-spacing:2px;text-transform:uppercase;">🇸🇬 シンガポール 個人所得税ブラケット（2024年）</h3>
+    <div class="tax-band">
+      <div class="tb-seg" style="flex:20;background:#2D5016;" data-tip="〜S$20,000: 0%"><span style="font-size:10px;">0%</span></div>
+      <div class="tb-seg" style="flex:10;background:#3D6B1E;" data-tip="S$20K-S$30K: 2%"><span style="font-size:10px;">2%</span></div>
+      <div class="tb-seg" style="flex:10;background:#4D7F26;" data-tip="S$30K-S$40K: 3.5%"><span style="font-size:10px;">3.5</span></div>
+      <div class="tb-seg" style="flex:10;background:#6B9E2A;" data-tip="S$40K-S$80K: 7%"><span style="font-size:10px;">7%</span></div>
+      <div class="tb-seg" style="flex:10;background:#8BBF35;" data-tip="S$80K-S$120K: 11.5%"><span style="font-size:9px;">11.5</span></div>
+      <div class="tb-seg" style="flex:10;background:#A8C840;" data-tip="S$120K-S$160K: 15%"><span style="font-size:10px;">15%</span></div>
+      <div class="tb-seg" style="flex:10;background:#C9943A;" data-tip="S$160K-S$200K: 18%"><span style="font-size:10px;">18%</span></div>
+      <div class="tb-seg" style="flex:10;background:#D4742A;" data-tip="S$200K-S$240K: 19%"><span style="font-size:10px;">19%</span></div>
+      <div class="tb-seg" style="flex:10;background:#C0192A;" data-tip="S$240K-S$280K: 19.5%"><span style="font-size:9px;">19.5</span></div>
+      <div class="tb-seg" style="flex:10;background:#A0141E;" data-tip="S$280K-S$320K: 20%"><span style="font-size:10px;">20%</span></div>
+      <div class="tb-seg" style="flex:10;background:#8B1018;" data-tip="S$320K-S$500K: 22%"><span style="font-size:10px;">22%</span></div>
+      <div class="tb-seg" style="flex:10;background:#6B0C12;" data-tip="S$500K〜S$1M: 23%"><span style="font-size:10px;">23%</span></div>
+      <div class="tb-seg" style="flex:5;background:#4A0809;" data-tip="S$1M超: 24%"><span style="font-size:9px;">24</span></div>
+    </div>
+    <p style="font-size:11px;color:rgba(255,255,255,.3);margin-top:8px;">→ S$20,000以下は非課税。中央値所得（S$5,500/月=年間S$66,000）の実効税率は約3〜6%程度。</p>
+  </div>
+
+  <div class="g2" style="margin-bottom:52px;">
+    <div>
+      <h3 style="font-size:14px;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:16px;letter-spacing:2px;text-transform:uppercase;">🇸🇬 CPF（中央積立基金）制度</h3>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="dk">
+          <div class="dk-l">55歳以下（基本レート）</div>
+          <div class="dk-t">労働者20% ＋ 雇用主17% ＝ 合計37%</div>
+          <div class="dk-b">月収S$7,400（2025年上限）に対し課税。上限を超える部分はCPF対象外。CPFは退職・住宅・医療の3用途に振り分けられ、金利は年2.5〜6%（OA/SA/MA別）。</div>
+        </div>
+        <div class="dk">
+          <div class="dk-l">CPFの3口座配分（55歳以下）</div>
+          <div class="dk-t">OA（普通口座）:SA（特別口座）:MA（医療口座）= 23:6:8</div>
+          <div class="dk-b">OAは住宅購入や投資に活用可。SAは退職専用・金利4%。MAはMedisave（医療費）に使用。外国人・外国籍保有者はCPF拠出義務なし。</div>
+        </div>
+        <div class="dk">
+          <div class="dk-l">重要：CPFは給与手取りを減らす</div>
+          <div class="dk-t">手取り = 月収 × (1 - 20%) - 所得税</div>
+          <div class="dk-b">月収S$5,500の場合、従業員CPF（20%）= S$1,100が自動天引き。残り約S$4,400が可処分所得となる（所得税は年間申告で別途）。</div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:14px;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:16px;letter-spacing:2px;text-transform:uppercase;">主要税目の比較</h3>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead><tr>
+          <th style="padding:10px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4);text-align:left;">税目</th>
+          <th style="padding:10px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);color:var(--sg);text-align:left;">🇸🇬 SG</th>
+          <th style="padding:10px 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.1);color:var(--jp);text-align:left;">🇯🇵 JP</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);">所得税（最高）</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#B8E08A;font-weight:600;">24%</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#88B4E0;font-weight:600;">55%（所得税45%+住民税10%）</td></tr>
+          <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);">所得税（実効・中央値層）</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#B8E08A;font-weight:600;">3〜6%</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#88B4E0;">15〜20%（住民税込）</td></tr>
+          <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);">消費税（GST/消費税）</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);">9%</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);">10%</td></tr>
+          <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);">社会保険料（従業員負担）</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);">CPF 20%（強制貯蓄）</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);">健保・厚生年金等 約15〜16%</td></tr>
+          <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);">キャピタルゲイン税</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#B8E08A;font-weight:600;">なし（0%）</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);">20.315%</td></tr>
+          <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);">相続税・贈与税</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#B8E08A;font-weight:600;">なし（0%）</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);">最高55%（相続）</td></tr>
+          <tr><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.5);">住民税</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:#B8E08A;font-weight:600;">なし</td><td style="padding:11px 12px;border-bottom:1px solid rgba(255,255,255,.06);color:rgba(255,255,255,.7);">一律10%</td></tr>
+          <tr><td style="padding:11px 12px;color:rgba(255,255,255,.5);">法人税</td><td style="padding:11px 12px;color:#B8E08A;font-weight:600;">17%</td><td style="padding:11px 12px;color:rgba(255,255,255,.7);">23.2%（実効30%超）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="g4">
+    <div class="stat dark-st fade"><div class="stat-n" style="color:var(--gold);">0%</div><div class="stat-l">キャピタルゲイン税・相続税・贈与税——シンガポールは全て非課税</div></div>
+    <div class="stat dark-st gold-d fade d1"><div class="stat-n">24%</div><div class="stat-l">個人所得税の最高税率（日本は最高55%）</div></div>
+    <div class="stat dark-st fade d2"><div class="stat-n" style="color:#B8E08A;">3〜6%</div><div class="stat-l">中央値所得層（年収S$55〜70万）の実効所得税率</div></div>
+    <div class="stat dark-st fade d3"><div class="stat-n">37%</div><div class="stat-l">CPF拠出率合計（うち従業員20%・雇用主17%）</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ S5: 貯蓄 ═══ -->
+<section id="s5" class="sec-alt">
+<div class="inner">
+  <div class="fade"><div class="ch-lbl">Chapter 05</div></div>
+  <div class="fade d1"><h2 class="ch-t">年代別 平均貯蓄額比較</h2></div>
+  <div class="fade d2"><p class="ch-sub">Savings by Age — Singapore vs Japan</p></div>
+  <div class="fade d2"><div class="ch-rule"></div></div>
+
+  <div class="g2" style="margin-bottom:48px;">
+    <div class="fade">
+      <p class="bp">シンガポールの個人貯蓄率は<strong>35〜40%</strong>（2024年）と世界でもトップクラス。ただしCPF拠出が大部分を占めるため、「現金貯蓄」はそれより低い。日本は長期的に貯蓄率が低下し、2024年の家計貯蓄率は約<strong>0.4%</strong>と歴史的低水準。</p>
+      <p class="bp">シンガポールで「30歳でS$10万」「40歳でS$20万（現金）」を目安にする考え方が一般的。CPFを含めた純資産はこれを大きく上回る。</p>
+    </div>
+    <div class="fade d1">
+      <div style="border:1px solid var(--border);padding:22px;background:var(--white);">
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;">国家貯蓄率（2024年）</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span>🇸🇬 シンガポール（国民貯蓄率）</span><span style="font-weight:700;color:var(--sg);">47.2%</span></div>
+            <div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="height:100%;width:94%;background:var(--sg);border-radius:4px;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span>🇸🇬 個人貯蓄率（2024年）</span><span style="font-weight:700;color:var(--sg);">35.3%</span></div>
+            <div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="height:100%;width:70%;background:var(--sg);border-radius:4px;opacity:.7;"></div></div>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;"><span>🇯🇵 日本（家計貯蓄率）</span><span style="font-weight:700;color:var(--jp);">0.4%</span></div>
+            <div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden;"><div style="height:100%;width:1%;background:var(--jp);border-radius:4px;"></div></div>
+          </div>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:12px;">※SG高貯蓄率の主因はCPF強制積立（労使合計37%）。日本は少子高齢化と可処分所得の伸び悩みで貯蓄率が低下。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Savings by age -->
+  <div style="overflow-x:auto;" class="fade">
+    <table class="ctbl" style="min-width:560px;">
+      <thead><tr>
+        <th>年代</th>
+        <th class="sg">🇸🇬 現金貯蓄目安（CPF除く）</th>
+        <th class="sg">CPF残高目安（含む）</th>
+        <th class="jp">🇯🇵 日本 世帯純金融資産</th>
+      </tr></thead>
+      <tbody>
+        <tr><td>20代後半</td><td class="hi">S$10〜20万</td><td>S$30〜50万</td><td>¥200〜600万</td></tr>
+        <tr><td>30代</td><td class="hi">S$50〜100万</td><td>S$80〜150万</td><td>¥500〜1,000万</td></tr>
+        <tr><td>40代</td><td class="hi">S$100〜200万</td><td>S$200〜400万</td><td>¥1,000〜2,000万</td></tr>
+        <tr><td>50代</td><td class="hi">S$200〜400万+</td><td>S$400〜700万+</td><td>¥1,500〜3,000万</td></tr>
+        <tr><td>60代（退職前）</td><td>S$200〜500万+</td><td class="hi">CPF Life開始</td><td>¥2,000〜4,000万</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:11px;color:var(--muted);margin-top:8px;" class="fade">※シンガポールは20%の現金貯蓄率を仮定。日本は家計調査（金融資産保有世帯のみ）を参考。個人差が大きい参考値。</p>
+
+  <div class="g3" style="margin-top:40px;">
+    <div class="card top-sg fade">
+      <div class="card-ico">🏦</div>
+      <div class="card-t">CPFの威力：「強制的な資産形成」</div>
+      <div class="card-b">CPFは自動的に給与から積み立てられる「強制貯蓄」。意識せずとも毎月収入の37%（労使合計）が資産として積み上がる。年利2.5〜6%の確定金利付き。退職時の月額CPF Lifeは積立額に応じて決まる。</div>
+    </div>
+    <div class="card top-gold fade d1">
+      <div class="card-ico">🎯</div>
+      <div class="card-t">シンガポール貯蓄の目安</div>
+      <div class="card-b">30歳：現金S$10万、40歳：S$20〜50万が目安。「50/30/20ルール（生活費:余暇:貯蓄）」が基本指針。68%のシンガポール人が何らかの投資を行い、平均投資額はS$2万。</div>
+    </div>
+    <div class="card top-jp fade d2">
+      <div class="card-ico">⚠️</div>
+      <div class="card-t">日本の貯蓄率急落の背景</div>
+      <div class="card-b">2024年の家計貯蓄率は0.4%と歴史的低水準。賃金の伸び悩み・インフレ・高齢化による取り崩しが重なった。一方、高齢者層の金融資産は約2,100兆円（国民金融資産）に上り「老人格差」が課題。</div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ═══ S6: まとめ ═══ -->
+<section id="s6" class="sec">
+<div class="inner">
+  <div class="fade"><div class="ch-lbl">Chapter 06</div></div>
+  <div class="fade d1"><h2 class="ch-t">生活コスト・給与・税制から<br>学べること</h2></div>
+  <div class="fade d2"><p class="ch-sub">Key Lessons — What Singapore's Money Story Teaches Us</p></div>
+  <div class="fade d2"><div class="ch-rule"></div></div>
+
+  <div class="g2" style="margin-bottom:48px;">
+    <div>
+      <div class="li fade">
+        <div class="li-n">01</div>
+        <div><div class="li-t">「住居費」が生活水準を左右する最大変数</div><div class="li-b">シンガポールの生活コストは住居費の選択で劇的に変わる。HDB居住（市民・PR）なら月S$0〜5の住宅コスト、コンドミニアム賃貸なら月S$3,000〜12,000。住居戦略が家計の全てを規定する。</div></div>
+      </div>
+      <div class="li fade d1">
+        <div class="li-n">02</div>
+        <div><div class="li-t">交通・通信は「世界最安水準」——選択次第で安くなる</div><div class="li-b">公共交通月額S$100、スマホS$10〜35、光回線S$35〜55。生活コストが高いと言われるシンガポールでも、インフラ費用は日本と比較して圧倒的に安い。移動・通信の賢い選択が家計防衛の基本。</div></div>
+      </div>
+      <div class="li fade d2">
+        <div class="li-n">03</div>
+        <div><div class="li-t">所得税の低さは「手取り改善」に直結する</div><div class="li-b">年収S$66,000（月収中央値）の実効税率は3〜6%程度。日本の同収入層（15〜20%）と比べ、10〜15%程度の手取り差が生まれる。ただしCPF20%天引きがあるため、「今すぐ使えるお金」としては見掛けより少なくなる点も理解が必要。</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="li fade">
+        <div class="li-n">04</div>
+        <div><div class="li-t">CPFは「強制的な資産形成装置」——老後の安心を自動的に作る</div><div class="li-b">意識しなくても毎月収入の37%（労使合計）がCPFに積み立てられ、住宅・医療・退職の三位一体をカバーする。「貯蓄意識がなくても資産が積み上がる」設計は、日本の任意拠出型NISAやiDeCoとは根本的に異なる強制力がある。</div></div>
+      </div>
+      <div class="li fade d1">
+        <div class="li-n">05</div>
+        <div><div class="li-t">ホーカー文化が「貧富の差」を縮める安全弁</div><div class="li-b">S$4〜8で栄養バランスのとれた食事ができるホーカーセンターの存在は、低〜中所得者の生活コストを劇的に下げる。GDP世界第2位の豊かさの裏に「誰でも安く食べられる」文化インフラがある。</div></div>
+      </div>
+      <div class="li fade d2">
+        <div class="li-n">06</div>
+        <div><div class="li-t">「高コスト・高収入・低税負担」の方程式を理解する</div><div class="li-b">シンガポールの生活は確かに高い。しかし給与も高く、税も低い。可処分所得の多さと社会インフラの充実度（安全・清潔・効率的な公共交通）を含めたトータルな生活の質で評価するべきであり、金額だけでの単純比較は本質を見逃す。</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pq fade">
+    <blockquote>シンガポールの強みは「稼いだ分が残りやすい」設計にある——低税率・CPFによる強制資産形成・手頃なインフラが支える、独自の豊かさの方程式。</blockquote>
+    <cite>— Singapore Money Guide 2025</cite>
+  </div>
+
+  <!-- Back link -->
+  <div style="margin-top:48px;text-align:center;" class="fade">
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;border:1px solid var(--border);padding:13px 26px;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);transition:border-color .3s,color .3s;" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)';" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)';">
+      ← Singapore Life Guide Top
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-in">
+    <div><div class="ft-logo">Singapore<span>Money</span></div><p class="ft-desc">シンガポールの給与・生活コスト・税制を日本との比較で解説するガイド。</p></div>
+    <div>
+      <div class="ft-col-t">Contents</div>
+      <div class="ft-lnk" onclick="go('s1')">01 — 給与・年収比較</div>
+      <div class="ft-lnk" onclick="go('s2')">02 — 物価・インフレ推移</div>
+      <div class="ft-lnk" onclick="go('s3')">03 — 生活コスト詳細</div>
+      <div class="ft-lnk" onclick="go('s4')">04 — 税制比較</div>
+      <div class="ft-lnk" onclick="go('s5')">05 — 年代別貯蓄額</div>
+      <div class="ft-lnk" onclick="go('s6')">06 — まとめ</div>
+    </div>
+    <div>
+      <div class="ft-col-t">Data Sources</div>
+      <p class="ft-desc" style="max-width:100%;">MOM Labour Force in Singapore 2024<br>IRAS Personal Income Tax Rates<br>CPF Board Official Rates 2025<br>SmartWealth.sg / SingSaver<br>Numbeo Cost of Living 2025<br>国税庁 民間給与実態統計</p>
+    </div>
+  </div>
+  <div class="ft-btm">
+    <span>© 2025 Singapore Life Guide — Money</span>
+    <span>Images: Unsplash (CC0)</span>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* Header */
+const secs=['s1','s2','s3','s4','s5','s6'];
+const nls=document.querySelectorAll('.nl');
+const secObs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){nls.forEach((b,i)=>{b.classList.toggle('on',secs[i]===x.target.id);});}}); },{threshold:0.2});
+secs.forEach(id=>{const el=document.getElementById(id);if(el)secObs.observe(el);});
+window.addEventListener('scroll',()=>{
+  document.getElementById('hdr').style.borderBottomColor=window.scrollY>20?'var(--border)':'transparent';
+  document.getElementById('btt').classList.toggle('show',window.scrollY>600);
+});
+
+function go(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth'});document.getElementById('smenu').classList.remove('open');}
+function toggleM(){document.getElementById('smenu').classList.toggle('open');}
+document.addEventListener('click',e=>{
+  const m=document.getElementById('smenu'),h=document.getElementById('hbg');
+  if(!m.contains(e.target)&&!h.contains(e.target))m.classList.remove('open');
+});
+
+/* Hero img */
+window.addEventListener('load',()=>document.getElementById('hi')?.classList.add('rdy'));
+
+/* Fade observer */
+const fades=document.querySelectorAll('.fade,.slide-l,.slide-r');
+const fo=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v');});},{threshold:0.1});
+fades.forEach(el=>{if(!el.classList.contains('v'))fo.observe(el);});
+</script>
+</body>
+</html>
